@@ -9,5 +9,4 @@ public interface ICommentService
     Task AddCommentAsync(Comment comment);
     Task EditCommentAsync(Comment comment);
     Task DeleteCommentAsync(int commentId);
-    Task<Comment> ValidateCommentExists(int commentId);
 }

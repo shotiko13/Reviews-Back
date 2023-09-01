@@ -17,12 +17,15 @@ public class CommentService : ICommentService
     
     public async Task<Comment> GetCommentAsync(int commentId)
     {
-        return await _dbContext.Comments.FindAsync(commentId);
+        var comment = await _dbContext.Comments.FindAsync(commentId);
+        if (comment == null)
+            throw new ArgumentNullException($"No comment with id - {commentId} found");
+        return comment;
     }
 
     public async Task<IEnumerable<Comment>> GetCommentsForReviewAsync(int reviewId)
     {
-        await _reviewService.ValidateReviewExists(reviewId);
+        await _reviewService.GetReviewByIdAsync(reviewId);
         return await _dbContext.Comments
                                .Where(comment => comment.ReviewId == reviewId)
                                .ToListAsync();
@@ -36,23 +39,16 @@ public class CommentService : ICommentService
 
     public async Task EditCommentAsync(Comment comment)
     {
-        await ValidateCommentExists(comment.CommentId);
+        await GetCommentAsync(comment.CommentId);
         _dbContext.Comments.Update(comment);
         await _dbContext.SaveChangesAsync();
     }
 
     public async Task DeleteCommentAsync(int commentId)
     {
-        var comment = await ValidateCommentExists(commentId);
+        var comment = await GetCommentAsync(commentId);
         _dbContext.Comments.Remove(comment);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<Comment> ValidateCommentExists(int commentId)
-    {
-        var comment = await GetCommentAsync(commentId);
-        if (comment == null)
-            throw new ArgumentNullException($"Comment with id - {commentId} couldn't be found");
-        return comment;
-    }
 }

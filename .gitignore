@@ -1,0 +1,16 @@
+﻿*
+
+!controllers/
+!models/
+!services/
+!Data/
+
+!Program.cs
+!README.md
+
+**/.DS_Store
+**/bin/
+**/obj/
+**/*.user
+**/*.suo
+**/*.log

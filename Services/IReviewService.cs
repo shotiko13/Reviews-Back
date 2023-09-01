@@ -9,6 +9,5 @@ public interface IReviewService
     Task CreateReviewAsync(Review review);
     Task DeleteReviewAsync(int id);
     Task UpdateReviewAsync(Review review);
-    Task<Review> ValidateReviewExists(int id);
 
 }

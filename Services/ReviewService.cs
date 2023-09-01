@@ -19,34 +19,30 @@ public class ReviewService : IReviewService
 
     public async Task<Review> GetReviewByIdAsync(int id)
     {
-        return await _dbContext.Reviews.FindAsync(id);
+        var review = await _dbContext.Reviews.FindAsync(id);
+        if (review == null)
+            throw new ArgumentNullException($"No review found with Id - {id}");
+        return review;
     }
 
     public async Task CreateReviewAsync(Review review)
     {
-        _dbContext.Reviews.AddAsync(review);
+        await _dbContext.Reviews.AddAsync(review);
         await _dbContext.SaveChangesAsync();
     }
 
     public async Task DeleteReviewAsync(int id)
     {
-        var review = await ValidateReviewExists(id);
+        var review = await GetReviewByIdAsync(id);
         _dbContext.Reviews.Remove(review);
         await _dbContext.SaveChangesAsync();
     }
 
     public async Task UpdateReviewAsync(Review review)
     {
-        await ValidateReviewExists(review.ReviewId);
+        await GetReviewByIdAsync(review.ReviewId);
         _dbContext.Reviews.Update(review);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<Review> ValidateReviewExists(int id)
-    {
-        var review = await GetReviewByIdAsync(id);
-        if (review == null)
-            throw new ArgumentNullException($"Review with id - {id} couldn't be found");
-        return review;
-    }
 }
