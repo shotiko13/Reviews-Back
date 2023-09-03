@@ -80,3 +80,4 @@ C:\Users\Shotiko\Desktop\Ihomeworks\Finals\Backend\ReviewAppProject\obj\Debug\ne
 C:\Users\Shotiko\Desktop\Ihomeworks\Finals\Backend\ReviewAppProject\obj\Debug\net7.0\ReviewAppProject.pdb
 C:\Users\Shotiko\Desktop\Ihomeworks\Finals\Backend\ReviewAppProject\obj\Debug\net7.0\ReviewAppProject.genruntimeconfig.cache
 C:\Users\Shotiko\Desktop\Ihomeworks\Finals\Backend\ReviewAppProject\obj\Debug\net7.0\ref\ReviewAppProject.dll
+C:\Users\Shotiko\Desktop\Ihomeworks\Finals\Backend\ReviewAppProject\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
